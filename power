@@ -1,0 +1,1 @@
+upower -i `upower -e | tail -n 1` | grep -E "state|time\ to\ empty|time\ to\ full|percentage"

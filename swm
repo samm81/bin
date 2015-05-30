@@ -1,0 +1,17 @@
+#!/bin/bash
+
+~/.xinitrc
+
+nm-applet &
+
+dwm-statusbar &
+#until dwm-statusbar &>/dev/null; do
+#    sleep 1
+#done &
+
+while true; do
+    change-desktop
+    sleep 180
+done &
+
+exec dwm

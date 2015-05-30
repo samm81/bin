@@ -1,0 +1,5 @@
+#!/bin/bash
+# Returns a randomly chosen background pic
+BACKGROUND_DIR="/home/sam/desktops"
+PIC=`ls /home/sam/desktops | shuf -n1`
+echo "$BACKGROUND_DIR/$PIC"
