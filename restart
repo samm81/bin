@@ -1,2 +1,2 @@
 #!/bin/bash
-echo `sudo /sbin/shutdown -r now`
+echo `sudo /sbin/reboot`

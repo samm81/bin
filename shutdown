@@ -1,2 +1,2 @@
 #!/bin/bash
-echo `sudo /sbin/shutdown -h -P now`
+echo `sudo /sbin/poweroff`
