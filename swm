@@ -4,8 +4,8 @@
 
 nm-applet &
 
-dwm-statusbar &
-#until dwm-statusbar &>/dev/null; do
+swm-statusbar &
+#until swm-statusbar &>/dev/null; do
 #    sleep 1
 #done &
 

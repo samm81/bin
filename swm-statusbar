@@ -5,12 +5,12 @@ colour_gry="\x01" # grey on black
 colour_wht="\x02" # white on black
 colour_dgry="\x04" # darkgrey on black
 colour_blk="\x05" # black on darkgrey
-colour_red="\x06" # colour_red on black
+colour_red="\x06" # red on black
 colour_grn="\x07" # green on black
 colour_dylw="\x08" # orange on black
 colour_ylw="\x09" # yellow on black
-colour_blu="\x0A" # colour_blue on darkgrey
-colour_mag="\x0B" # colour_magenta on darkgrey
+colour_blu="\x0A" # blue on darkgrey
+colour_mag="\x0B" # magenta on darkgrey
 colour_cyn="\x0C" # cyan on darkgrey
 
 # Icon glyphs from font xbmicons.pcf
@@ -24,6 +24,8 @@ glyph_eml="\uE014"
 glyph_vol="\uE015"
 glyph_tim="\uE016"
 glyph_tor="\uE017"
+glyph_wifi="\uE01E"
+glyph_bat="\uE01F"
 sep_solid="\uE01A"
 sep_line="\uE01B"
 sep_bar="\uE020"
@@ -50,14 +52,9 @@ print_datetime() {
 }
 
 print_battery() {
-	battery=$(( `cat /sys/class/power_supply/BAT1/charge_now` * 100 / `cat /sys/class/power_supply/BAT1/charge_full` ))
-	if [ "$( cat /sys/class/power_supply/ADP1/online )" -eq 1 ]
-	then
-		battery_state="charging"
-	else
-		battery_state="discharging"
-	fi
-	echo -ne "${colour_dgry}${sep_solid}${colour_mag} ${glyph_eml} ${battery} ${battery_state}"
+	battery=$(( `cat /sys/class/power_supply/BAT0/energy_now` * 100 / `cat /sys/class/power_supply/BAT0/energy_full` ))
+	battery_state=`cat /sys/class/power_supply/BAT0/status`
+	echo -ne "${colour_dgry}${sep_solid}${colour_cyn} ${glyph_bat} ${battery} ${battery_state} "
 }
 
 print_wifi() {
@@ -66,7 +63,7 @@ print_wifi() {
 	then
 		essid="--"
 	fi
-	echo -ne "${colour_blk}${sep_solid}${colour_dylw} ${glyph_eml} ${essid}"
+	echo -ne "${colour_blk}${sep_solid}${colour_dylw} ${glyph_wifi} ${essid} "
 }
 
 # network (from: http://dzen.geekmode.org/dwiki/doku.php?id=dzen:network-meter)
@@ -103,11 +100,11 @@ while true; do
 
 	# Pipe to status bar, not indented due to printing extra spaces/tabs
 	xsetroot -name "
+$(print_battery)\
+$(print_wifi)\
 $(print_cpu_used)$(print_mem_used)\
 $(print_rx_rate)$(print_tx_rate)\
-$(print_wifi)\
 $(print_volume)\
-$(print_battery)\
 $(print_datetime)
 "
 
