@@ -2,5 +2,4 @@
 # Randomly changes background pic
 DESKTOP_DIR=/home/sam/desktops
 DESKTOP=$DESKTOP_DIR/$(ls $DESKTOP_DIR | shuf -n 1)
-xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitoreDP1/workspace0/last-image -s $DESKTOP
 feh --bg-scale $DESKTOP
