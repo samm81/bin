@@ -2,7 +2,7 @@
 
 ~/.xinitrc
 
-nm-applet &
+redshift &
 
 swm-statusbar &
 #until swm-statusbar &>/dev/null; do
