@@ -2,8 +2,6 @@
 
 ~/.xinitrc
 
-redshift &
-
 swm-statusbar &
 #until swm-statusbar &>/dev/null; do
 #    sleep 1
