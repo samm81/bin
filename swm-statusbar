@@ -62,7 +62,7 @@ print_battery() {
 }
 
 print_wifi() {
-	essid=$( /sbin/iwgetid -r ) 
+	essid=$( /sbin/iwgetid -r )
 	if [ $DWM_ESSID == "" ]
 	then
 		essid="--"
@@ -118,5 +118,5 @@ $(print_datetime)
 	cpu_idle_old=$cpu_idle_now
 	cpu_total_old=$cpu_total_now
 	# loop stats every 1 second
-	sleep 1
+	sleep 0.5
 done
