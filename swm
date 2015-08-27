@@ -13,7 +13,9 @@ while true; do
     sleep 180
 done &
 
+sudo tlp start &
 redshift &
+eval "$(ssh-agent -s)" &
 chrome &
 tmux &
 st -e tmux new -s work || st -e tmux attach -t work &
