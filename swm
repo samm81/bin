@@ -13,14 +13,14 @@ while true; do
     sleep 180
 done &
 
-sudo tlp start &
+sudo tlp start
 redshift &
 eval "$(ssh-agent -s)" &
 chrome &
 tmux &
-st -e tmux new -s work || st -e tmux attach -t work &
-st -e tmux new -s school || st -e tmux attach -t school &
+st -e tmux new -s os || st -e tmux attach -t os &
 st -e tmux new -s misc || st -e tmux attach -t misc &
+st -e tmux new -s PL || st -e tmux attach -t PL &
 
 dwm
 
@@ -28,4 +28,4 @@ pkill --oldest --signal TERM -f chrome
 while pkill -0 chrome; do sleep .25; done # wait for chrome to safely close
 pkill redshift
 pkill swm-statusbar
-pkill swm
+exit
