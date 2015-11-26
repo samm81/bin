@@ -51,7 +51,7 @@ print_volume_and_brightness() {
 }
 
 print_datetime() {
-	datetime="$(date "+%a %d %b ${sep_line} %H:%M:%S")"
+	datetime="$(date "+%a %d %b ${sep_line} %r")"
 	echo -ne "${colour_blk}${sep_solid}${colour_wht} ${glyph_tim} ${datetime} "
 }
 
@@ -63,7 +63,7 @@ print_battery() {
 
 print_wifi() {
 	essid=$( /sbin/iwgetid -r )
-	if [ $DWM_ESSID == "" ]
+	if [[ $essid == "" ]]
 	then
 		essid="--"
 	fi
