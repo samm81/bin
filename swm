@@ -14,17 +14,13 @@ while true; do
 done &
 
 redshift &
-eval "$(ssh-agent -s)" &
-chrome &
-#tmux &
-#st -e tmux new -s os || st -e tmux attach -t os &
-#st -e tmux new -s misc || st -e tmux attach -t misc &
-#st -e tmux new -s PL || st -e tmux attach -t PL &
 
 dwm
 
 pkill --oldest --signal TERM -f chrome
+pkill --oldest --signal TERM -f opera
 while pkill -0 chrome; do sleep .25; done # wait for chrome to safely close
+while pkill -0 opera; do sleep .25; done # wait for opera to safely close
 pkill redshift
 pkill swm-statusbar
 exit
