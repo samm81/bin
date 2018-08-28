@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+if test "$BASH" = "" || "$BASH" -uc "a=();true \"\${a[@]}\"" 2>/dev/null; then
+	# Bash 4.4, Zsh
+	set -euo pipefail
+else
+	# Bash 4.3 and older chokes on empty arrays with set -u.
+	set -eo pipefail
+fi
+shopt -s nullglob globstar
+
+DAY=$(date +%d)
+MONTH=$(date +%m)
+FILE=/tmp/dailydiary-$MONTH-$DAY.html
+
+echo "" > $FILE
+for YEAR in {2017..2013}; do
+    echo "<iframe width='19.5%' height='97%' src='https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=$YEAR&page=$DAY&month=$MONTH'></iframe>" >> $FILE
+done
+
+google-chrome $FILE

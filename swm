@@ -13,7 +13,8 @@ while true; do
     sleep 180
 done &
 
-redshift &
+fluxgui &
+rescuetime &
 
 dwm
 
@@ -21,6 +22,7 @@ pkill --oldest --signal TERM -f chrome
 pkill --oldest --signal TERM -f opera
 while pkill -0 chrome; do sleep .25; done # wait for chrome to safely close
 while pkill -0 opera; do sleep .25; done # wait for opera to safely close
-pkill redshift
+pkill rescuetime
+pkill fluxgui
 pkill swm-statusbar
 exit

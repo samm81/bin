@@ -37,10 +37,10 @@ print_mem_used() {
 }
 
 print_volume_and_brightness() {
-	state="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)\]$/\1/')"
+	state="$(amixer -D pulse get Master | tail -n1 | sed -r 's/.*\[(.*)\]$/\1/')"
 	if [ "$state" = "on" ]
 	then
-		volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
+		volume="$(amixer -D pulse get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
 	else
 		volume="0"
 	fi
