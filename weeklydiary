@@ -8,17 +8,18 @@ else
 fi
 shopt -s nullglob globstar
 
-
-DAY=$(date -d "last-sunday" +%d)
-MONTH=$(date -d "last-sunday" +%m)
+SUNDAY_OFFSET=$(date -d today +%w)
+DAY=$(date -d "today -${SUNDAY_OFFSET} days" +%d)
+MONTH=$(date -d "today -${SUNDAY_OFFSET} days" +%m)
 FILE=/tmp/weeklydiary-$MONTH-$DAY.html
 
-echo "" > $FILE
+echo "" > "$FILE"
 for i in {6..0}; do
-    DAY=$(date -d "last-sunday-${i} day" +%d)
-    MONTH=$(date -d "last-sunday-${i} day" +%m)
-    YEAR=$(date -d "last-sunday-${i} day" +%Y)
-    echo "<iframe width='49.5%' height='47%' src='https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=$YEAR&page=$DAY&month=$MONTH'></iframe>" >> $FILE
+    OFFSET=$((i + SUNDAY_OFFSET))
+    DAY=$(date -d "today -${OFFSET} days" +%d)
+    MONTH=$(date -d "today -${OFFSET} days" +%m)
+    YEAR=$(date -d "today -${OFFSET} days" +%Y)
+    echo "<iframe width='49.5%' height='47%' src='https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=$YEAR&page=$DAY&month=$MONTH'></iframe>" >> "$FILE"
 done
 
-google-chrome $FILE
+google-chrome "$FILE"
