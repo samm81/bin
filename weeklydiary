@@ -9,17 +9,11 @@ fi
 shopt -s nullglob globstar
 
 SUNDAY_OFFSET=$(date -d today +%w)
-DAY=$(date -d "today -${SUNDAY_OFFSET} days" +%d)
-MONTH=$(date -d "today -${SUNDAY_OFFSET} days" +%m)
-FILE=/tmp/weeklydiary-$MONTH-$DAY.html
 
-echo "" > "$FILE"
 for i in {6..0}; do
     OFFSET=$((i + SUNDAY_OFFSET))
     DAY=$(date -d "today -${OFFSET} days" +%d)
     MONTH=$(date -d "today -${OFFSET} days" +%m)
     YEAR=$(date -d "today -${OFFSET} days" +%Y)
-    echo "<iframe width='49.5%' height='47%' src='https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=$YEAR&page=$DAY&month=$MONTH'></iframe>" >> "$FILE"
+    xdg-open "https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=${YEAR}&page=${DAY}&month=${MONTH}"
 done
-
-google-chrome "$FILE"
