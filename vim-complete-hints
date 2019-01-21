@@ -1,0 +1,4 @@
+clear
+sed -n '625,637p' /usr/share/vim/vim80/doc/insert.txt | tr -s '\t' | tr '\t' '\n'
+tmux resize-pane -x 21
+sleep infinity
