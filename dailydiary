@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+/usr/bin/env bash
 if test "$BASH" = "" || "$BASH" -uc "a=();true \"\${a[@]}\"" 2>/dev/null; then
 	# Bash 4.4, Zsh
 	set -euo pipefail
@@ -8,9 +8,10 @@ else
 fi
 shopt -s nullglob globstar
 
+CUR_YEAR=$(date +%Y)
 DAY=$(date +%d)
 MONTH=$(date +%m)
 
-for YEAR in {2017..2013}; do
+for YEAR in $(seq $(($CUR_YEAR - 1)) -1 $(($CUR_YEAR - 5))); do
     xdg-open "https://www.dailydiary.com/myquestions/342540/how-did-your-day-go/journal?perpage=1&year=${YEAR}&page=${DAY}&month=${MONTH}"
 done
