@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+BASE16_SHELL="$HOME/.config/base16-shell/"
+eval "$("${BASE16_SHELL}/profile_helper.sh")"
+change_theme() {
+	THEMES="${BASE16_SHELL}/scripts"
+	THEME=$(ls ${THEMES} | shuf -n 1)
+	THEME_NAME=$(basename -s .sh ${THEME} | cut -d - -f 1 --complement)
+
+	_base16 ${THEMES}/${THEME} ${THEME_NAME}
+}
+
+change_theme
+
+if [ -n "$1" ]
+then
+	while [ $? -eq 0 ]
+	do
+		sleep $1
+		change_theme
+	done
+fi
